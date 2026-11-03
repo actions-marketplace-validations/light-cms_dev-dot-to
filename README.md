@@ -43,3 +43,9 @@ jobs:
     published: 'true'
 ```
 
+
+`DEVTO_TOKEN` is a repository secret.
+
+![devto_token](https://kappa.lol/JHLini)
+
+![token](https://kappa.lol/1OcFkq)
