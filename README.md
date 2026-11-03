@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v5
 
       - name: Publish new feed items
-        uses: ./
+        uses: light-cms/dev-dot-to@1.0.0
         with:
           rss_url: https://blogs.lightcms.me/atom.xml
           devto_token: ${{ secrets.DEVTO_TOKEN }}
