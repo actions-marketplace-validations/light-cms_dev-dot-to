@@ -1,0 +1,10 @@
+{
+  "name": "dev-dot-to",
+  "private": true,
+  "description": "GitHub Action: publish RSS feed items (or single articles) to dev.to",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "smoke": "node tools/smoke.js"
+  }
+}

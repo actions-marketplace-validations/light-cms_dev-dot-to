@@ -1,0 +1,45 @@
+name: 'rssfeed to dev.to'
+description: 'Publish articles to dev.to — from an RSS feed (newest items, skipping already-published ones) or from a single article passed via workflow inputs'
+branding:
+  icon: 'rss'
+  color: 'purple'
+
+inputs:
+  rss_url:
+    description: URL of the RSS/Atom feed to publish from (feed mode)
+    required: false
+  devto_token:
+    description: dev.to API token — pass it from a repository secret
+    required: true
+  body_markdown:
+    description: Article content (markdown). Use together with `title` for one-off publishing instead of a feed
+    required: false
+  title:
+    description: Article title. Required together with `body_markdown` when `rss_url` is not set
+    required: false
+  published:
+    description: Whether the post goes live immediately (`true`) or lands as a draft (`false`)
+    required: true
+    default: 'true'
+  max_posts:
+    description: How many newest feed items to publish per run (feed mode only)
+    required: false
+    default: '1'
+  skip_existing:
+    description: Skip feed items already published by this action (matched via canonical_url)
+    required: false
+    default: 'true'
+
+outputs:
+  id:
+    description: ID of the (first) article created
+  url:
+    description: URL of the (first) article created
+  ids:
+    description: Comma-separated IDs of every article created this run
+  urls:
+    description: Comma-separated URLs of every article created this run
+
+runs:
+  using: node24
+  main: src/index.js
