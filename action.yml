@@ -1,5 +1,5 @@
 name: 'rssfeed to dev.to'
-description: 'Publish articles to dev.to — from an RSS feed (newest items, skipping already-published ones) or from a single article passed via workflow inputs'
+description: 'Publish articles to dev.to from an RSS feed'
 branding:
   icon: 'rss'
   color: 'purple'
