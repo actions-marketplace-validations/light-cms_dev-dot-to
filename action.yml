@@ -1,5 +1,5 @@
 name: 'rssfeed to dev.to'
-description: 'Publish articles to dev.to from an RSS feed'
+description: 'Publish or update articles on dev.to from an RSS feed or single post inputs'
 branding:
   icon: 'rss'
   color: 'purple'
@@ -9,36 +9,58 @@ inputs:
     description: URL of the RSS/Atom feed to publish from (feed mode)
     required: false
   devto_token:
-    description: dev.to API token — pass it from a repository secret
+    description: dev.to API token pass it from a repository secret
     required: true
   body_markdown:
-    description: Article content (markdown). Use together with `title` for one-off publishing instead of a feed
+    description: Article content. Use together with `title` for one-off publishing or with `article_id` for updates
     required: false
   title:
-    description: Article title. Required together with `body_markdown` when `rss_url` is not set
+    description: Article title. Required together with `body_markdown` when `rss_url` and `article_id` are not set
+    required: false
+  article_id:
+    description: dev.to article ID to update directly (single mode)
+    required: false
+  canonical_url:
+    description: Original article URL for canonical reference and duplicate/update matching
+    required: false
+  description:
+    description: Article summary/description for SEO and previews
+    required: false
+  tags:
+    description: Comma-separated list of tags (up to 4 tags, e.g. 'javascript, webdev')
+    required: false
+  series:
+    description: Name of the series to add the article to
+    required: false
+  main_image:
+    description: URL of the cover image for the article
     required: false
   published:
     description: Whether the post goes live immediately (`true`) or lands as a draft (`false`)
     required: true
     default: 'true'
   max_posts:
-    description: How many newest feed items to publish per run (feed mode only)
+    description: How many newest feed items to publish/update per run (feed mode only)
     required: false
     default: '1'
   skip_existing:
-    description: Skip feed items already published by this action (matched via canonical_url)
+    description: Skip feed items already published by this action (matched via canonical_url). Ignored if `update_existing` is true
     required: false
     default: 'true'
+  update_existing:
+    description: Update already published articles if they exist (matched via canonical_url or title in feed/single mode, or via article_id) instead of skipping or creating duplicates
+    required: false
+    default: 'false'
 
 outputs:
   id:
-    description: ID of the (first) article created
+    description: ID of the article created or updated
   url:
-    description: URL of the (first) article created
+    description: URL of the article created or updated
   ids:
-    description: Comma-separated IDs of every article created this run
+    description: IDs of created or updated this run
   urls:
-    description: Comma-separated URLs of every article created this run
+    description: URLs of created or updated this run
 
 runs:
   using: node24
